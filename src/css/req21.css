@@ -1,0 +1,13 @@
+
+/* Inputs ocupan todo el ancho de la celda */
+.table td input {
+  width: 100%;
+}
+
+/* Mejor espaciado en botones en móviles */
+@media (max-width: 576px) {
+  .d-flex.gap-2 {
+    flex-direction: column;
+    gap: 0.5rem !important;
+  }
+}

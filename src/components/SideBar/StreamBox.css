@@ -1,0 +1,37 @@
+/*El borde expande ligeramente el componente*/
+#NickNameOverflow{
+    width: 70%; /*Ocupa el 70% de su padre*/
+    overflow-x: hidden;
+}
+.ImgBox{
+    width: 22%;
+    height: fit-content;
+    margin-right: 5%;
+}
+.StreamerImg{
+    width: 100%;
+    height: auto;
+    border-radius: 100%;
+}
+#StreamerBox {
+    display: flex; /*Activa el align items, además que hace que los items sean un row*/
+    align-items: center; /*Alinearlos al centro vertical*/
+    padding-right: 0px; /*Esto más la prioridad por id deja llenar el componente*/
+    color: #E0E0E0;
+}
+#OnStreamBox {
+    display : flex; /*Activa el align items, además que hace que los items sean un row*/
+    align-items: center; /*Alinearlos al centro vertical*/
+    padding: 0px;
+    color: #E0E0E0;
+}
+h5.TextBox{
+    font-size: smaller;
+    margin-top: 5px; /*Es un interlineado*/
+    margin-bottom: 5px; /*Es un interlineado*/
+}
+h6.TextBox{
+    font-size: x-small;
+    margin-top: 5px; /*Es un interlineado*/
+    margin-bottom: 5px; /*Es un interlineado*/
+}

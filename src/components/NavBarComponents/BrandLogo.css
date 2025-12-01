@@ -1,0 +1,38 @@
+/* components/NavBar/BrandLogo.css */
+
+.title {
+	color: rgb(var(--blue-dwarf));
+	transition: color 1s linear;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: xx-large;
+    padding-top: 11px; /*Hace que el titulo esté completamente centrado. Manual*/
+    margin-right: 11px; /*Separa del componente de 3 puntos*/
+}
+
+.title:hover {
+  	animation: hoverColorFlow 1s forwards;
+	cursor : pointer;
+}
+
+.title:not(:hover) {
+  	animation: hoverColorReverse 1s forwards;
+}
+
+@keyframes hoverColorFlow {
+	0%   { color: rgb(var(--luminous-teal)); }
+	50%  { color: rgb(var(--red-giant-orange)); }
+	100% { color: rgb(var(--blue-dwarf)); }
+}
+
+@keyframes hoverColorReverse {
+	0%   { color: rgb(var(--blue-dwarf)); }
+	50%  { color: rgb(var(--red-giant-orange)); }
+	100% { color: rgb(var(--luminous-teal)); }
+}
+
+.a-nave {
+	font-size: 2.5rem;
+	transform: rotate(-6deg);
+	display: inline-block;
+}

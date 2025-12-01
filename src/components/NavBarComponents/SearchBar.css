@@ -1,0 +1,11 @@
+.SearchBar{
+    display: flex;
+}
+.SearchInput{
+    width: 90%;
+    border-radius: 11px;
+    padding-left: 1rem !important;
+}
+.blocked{
+    cursor: not-allowed !important;
+}
