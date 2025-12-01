@@ -88,7 +88,10 @@ export const getStreamerLoyaltyLevels = async (streamerId: string): Promise<Loya
         }
         return [];
     } catch (error) {
-        console.error(`Error fetching loyalty levels for streamer ${streamerId}:`, error);
-        return []; // Return empty array on error to avoid breaking UI
+        const err = error as any;
+        if (err.status === 401 || (err.response && err.response.status === 401) || (err.message && typeof err.message === 'string' && err.message.includes('401'))) {
+            return [];
+        }
+        return [];
     }
 };

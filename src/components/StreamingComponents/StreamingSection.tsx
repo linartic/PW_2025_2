@@ -16,7 +16,7 @@ interface StreamingSectionProps {
     following: User[];
     GetUser: () => User | null
     doFollowing: (user: User) => void
-    doViewersDivision : (dividendo : number, divisor : number, decimas : number) => string
+    doViewersDivision: (dividendo: number, divisor: number, decimas: number) => string
 }
 
 const StreamingSection = (props: StreamingSectionProps) => {
@@ -24,11 +24,9 @@ const StreamingSection = (props: StreamingSectionProps) => {
     const [loyaltyLevels, setLoyaltyLevels] = useState<LoyaltyLevel[]>([]);
     const [currentPoints, setCurrentPoints] = useState<number>(0);
     const [giftNotification, setGiftNotification] = useState<{ sender: string; gift: string } | null>(null);
-
-    // Try to get user from props, fallback to direct localStorage access via service
     const user = props.GetUser() || getCurrentUser();
 
-    // Guard clause to prevent rendering if stream data is missing
+
     if (!props.stream || !props.stream.user) {
         return <div className="MiddleSide d-flex justify-content-center align-items-center">
             <div className="spinner-border text-light" role="status">
@@ -47,21 +45,16 @@ const StreamingSection = (props: StreamingSectionProps) => {
         }
     }, [user, props.stream]);
 
-    // Fetch loyalty levels and user points
     useEffect(() => {
         const fetchData = async () => {
             if (props.stream?.user?.id) {
                 try {
-                    // Fetch levels only if user is logged in
-                    // If loyalty levels are public, this check might need to be removed and the backend updated to allow public access
-                    // But to fix the 401 error as requested, we must check for user
                     if (user) {
                         const levels = await getStreamerLoyaltyLevels(props.stream.user.id.toString());
                         const sortedLevels = levels.sort((a, b) => a.puntosRequeridos - b.puntosRequeridos);
                         setLoyaltyLevels(sortedLevels);
                     }
 
-                    // Fetch user points if logged in
                     if (user) {
                         const pointsData = await getUserPoints();
                         const streamerId = String(props.stream.user.id);
@@ -78,12 +71,11 @@ const StreamingSection = (props: StreamingSectionProps) => {
         fetchData();
     }, [props.stream?.user?.id, user?.id]);
 
-    // Watch Time Points Logic
     useEffect(() => {
         if (!user || !props.stream.user.id || user.id === props.stream.user.id) return;
 
         const POINTS_PER_INTERVAL = 10;
-        const INTERVAL_MS = 60000; // 1 minute
+        const INTERVAL_MS = 60000;
 
         const interval = setInterval(async () => {
             try {
@@ -96,9 +88,6 @@ const StreamingSection = (props: StreamingSectionProps) => {
 
                 if (response.success) {
                     setCurrentPoints(prev => prev + response.pointsEarned);
-
-                    // Optional: Show a small toast or notification?
-                    // For now, just updating the bar is enough as per request
                 }
             } catch (error) {
                 console.error("Error awarding watch time points:", error);
@@ -108,7 +97,7 @@ const StreamingSection = (props: StreamingSectionProps) => {
         return () => clearInterval(interval);
     }, [user, props.stream.user.id, props.stream.user.name]);
 
-    // Listen for local points updates (from gifts)
+    // Escuchar actualizaciones locales de puntos (de regalos)
     useEffect(() => {
         const handlePointsUpdate = (event: any) => {
             const { points, streamerId } = event.detail;
@@ -123,19 +112,22 @@ const StreamingSection = (props: StreamingSectionProps) => {
         };
     }, [props.stream.user.id, user]);
 
-    // Listen for gift events from WebSocket
+    // Escuchar eventos de regalos desde WebSocket
     useEffect(() => {
         const unsubscribe = chatService.onGiftReceived((giftData) => {
-            setGiftNotification({
-                sender: giftData.senderName,
-                gift: giftData.giftName
-            });
+            // Solo mostrar notificación si soy el streamer
+            if (user && String(user.id) === String(props.stream.user.id)) {
+                setGiftNotification({
+                    sender: giftData.senderName,
+                    gift: giftData.giftName
+                });
+            }
         });
 
         return () => {
             unsubscribe();
         };
-    }, []);
+    }, [user, props.stream.user.id]);
 
     const isFollowing = () => {
         let following = false
@@ -147,16 +139,16 @@ const StreamingSection = (props: StreamingSectionProps) => {
         return following
     }
 
-    // Calculate progress
+    // Calcular progreso
     const getViewerProgress = () => {
         if (!user) return { current: 0, max: 100, topic: "puntos" };
 
-        // Use fetched points
+        // Usar puntos obtenidos
         const points = currentPoints;
 
         if (loyaltyLevels.length === 0) return { current: points, max: 100, topic: "puntos" };
 
-        // Find current and next level
+        // Encontrar nivel actual y siguiente
         let currentLvl = null;
         let nextLvl = null;
 
@@ -169,7 +161,7 @@ const StreamingSection = (props: StreamingSectionProps) => {
             }
         }
 
-        // If no next level, we are at max
+        // Si no hay siguiente nivel, estamos en el máximo
         if (!nextLvl) {
             return {
                 current: points,
@@ -187,7 +179,7 @@ const StreamingSection = (props: StreamingSectionProps) => {
 
     const progress = getViewerProgress();
 
-    // Fallback: Check localStorage for iframeUrl if it's missing from props (only for the streamer themselves)
+    // Fallback: Verificar localStorage para iframeUrl si falta en props (solo para el streamer)
     const iframeUrl = (props.stream as any).iframeUrl ||
         (user && props.stream.user.id === user.id ? localStorage.getItem('stream_iframe_url') : null);
 
@@ -232,19 +224,18 @@ const StreamingSection = (props: StreamingSectionProps) => {
                             <h3 className="TextBox">{props.stream.user.name}</h3>
                             <h4 className="TextBox my-0">{props.stream.title}</h4>
                             <Link to={`/game/${props.stream.game.name}`}>
-                                <h4 className="TextBox m-0 clickable_text">{ props.stream.game.name }</h4>
+                                <h4 className="TextBox m-0 clickable_text">{props.stream.game.name}</h4>
                             </Link>
                         </div>
                     </div>
                     <div className="text-start ">
                         {
-                            !Issighting ?
-                                ""
-                                :
+                            !Issighting && user ?
                                 <FollowButton doFollowing={props.doFollowing} isFollowing={isFollowing()} user={props.stream.user}></FollowButton>
+                                : ""
                         }
                         <div className="ms-4">
-                            <span className="badge bg-danger">{props.stream.viewersnumber >= 1000000? props.doViewersDivision(props.stream.viewersnumber,1000000,1) + " M ": props.stream.viewersnumber >= 1000? props.doViewersDivision(props.stream.viewersnumber,1000,1) + " K ":props.stream.viewersnumber}viewers</span>
+                            <span className="badge bg-danger">{props.stream.viewersnumber >= 1000000 ? props.doViewersDivision(props.stream.viewersnumber, 1000000, 1) + " M " : props.stream.viewersnumber >= 1000 ? props.doViewersDivision(props.stream.viewersnumber, 1000, 1) + " K " : props.stream.viewersnumber}viewers</span>
                         </div>
                     </div>
                 </div>
