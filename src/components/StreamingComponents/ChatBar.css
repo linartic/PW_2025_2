@@ -1,0 +1,11 @@
+.ChatInput{
+    width: 100%;
+}
+.ChatButton{
+    width: auto;
+    font-size: 12px;
+}
+.ChatBar{
+    display: flex;
+    height: 3rem;
+}
