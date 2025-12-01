@@ -176,7 +176,7 @@ const Streaming = (props: StreamingProps) => {
                 <StreamingSection doViewersDivision={props.doViewersDivision} GetUser={props.GetUser} stream={localStream} following={props.following} doFollowing={props.doFollowing}></StreamingSection>
             </div>
             <div id="Right-Page" className="col-12 col-lg-3 h-auto h-lg-100 border-start border-secondary">
-                <div className="h-100" style={{ minHeight: '500px' }}>
+                <div className="h-100 chatsito">
                     {localStream.user.online ? (
                         <ChatSection stream={localStream} doChatting={props.doChatting} GetUser={props.GetUser}></ChatSection>
                     ) : (

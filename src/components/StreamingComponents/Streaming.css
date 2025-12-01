@@ -1,7 +1,10 @@
 .Main-Seccion {
     height: 100%;
 }
+.chatsito{
+    min-height: 500px;
 
+}
 #Middle-Page {
     height: 100%;
     /* width handled by bootstrap */

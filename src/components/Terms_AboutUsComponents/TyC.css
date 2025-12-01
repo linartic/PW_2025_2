@@ -1,3 +1,7 @@
 .margins{
     top: 2.5rem;
 }
+
+.texto{
+    max-width: 600px;
+}

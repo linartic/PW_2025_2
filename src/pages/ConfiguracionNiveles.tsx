@@ -92,9 +92,9 @@ const ConfiguracionNiveles = () => {
               <div className="card-body">
                 <div className="d-flex align-items-center mb-3">
                   {nivel.image ? (
-                    <img src={nivel.image} alt={nivel.nombre} className="rounded-circle medal me-3" style={{ width: '50px', height: '50px' }} />
+                    <img src={nivel.image} alt={nivel.nombre} className="rounded-circle medal me-3"/>
                   ) : (
-                    <div className="bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white me-3" style={{ width: '50px', height: '50px' }}>
+                    <div className="bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white me-3" >
                       {nivel.nombre.charAt(0)}
                     </div>
                   )}
@@ -141,9 +141,9 @@ const ConfiguracionNiveles = () => {
                 <tr key={nivel.id || Math.random()}>
                   <td>
                     {nivel.image ? (
-                      <img src={nivel.image} alt={nivel.nombre} className="rounded-circle medal" />
+                      <img src={nivel.image} alt={nivel.nombre} className="medal m-3"/>
                     ) : (
-                      <div className="bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white">
+                      <div className="bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white w-100">
                         {nivel.nombre.charAt(0)}
                       </div>
                     )}

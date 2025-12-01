@@ -17,7 +17,7 @@
     margin: 0 auto;
 }
 .medal{
-    transform: scale(1);
+    transform: scale(3);
     image-rendering: pixelated;
 }
 
