@@ -85,7 +85,48 @@ const ConfiguracionNiveles = () => {
         {error && <div className="alert alert-danger">{error}</div>}
         {successMessage && <div className="alert alert-success">{successMessage}</div>}
 
-        <div className="table-responsive">
+        {/* Mobile View (Cards) */}
+        <div className="d-md-none">
+          {niveles.map((nivel) => (
+            <div className="card mb-3 bg-dark border-secondary" key={nivel.id || Math.random()}>
+              <div className="card-body">
+                <div className="d-flex align-items-center mb-3">
+                  {nivel.image ? (
+                    <img src={nivel.image} alt={nivel.nombre} className="rounded-circle medal me-3" style={{ width: '50px', height: '50px' }} />
+                  ) : (
+                    <div className="bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white me-3" style={{ width: '50px', height: '50px' }}>
+                      {nivel.nombre.charAt(0)}
+                    </div>
+                  )}
+                  <h5 className="card-title mb-0">{nivel.nombre}</h5>
+                </div>
+                <div className="mb-3">
+                  <label className="form-label text-muted small">Puntos Requeridos</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    value={nivel.puntosRequeridos}
+                    onChange={(e) => handleUpdate(nivel.id!, 'puntosRequeridos', parseInt(e.target.value) || 0)}
+                    placeholder="0"
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label text-muted small">Recompensa</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={nivel.recompensa}
+                    onChange={(e) => handleUpdate(nivel.id!, 'recompensa', e.target.value)}
+                    placeholder="Recompensa (Opcional)"
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop View (Table) */}
+        <div className="table-responsive d-none d-md-block">
           <table className="table table-hover align-middle">
             <thead>
               <tr>

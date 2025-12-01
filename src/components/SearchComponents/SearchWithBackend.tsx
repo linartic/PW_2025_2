@@ -155,10 +155,12 @@ const SearchWithBackend = () => {
             </h4>
           </div>
 
-          <div className="row">
+          <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
             {results.length > 0 ? (
               results.map((stream: Stream) => (
-                <StreamCard key={stream.id} stream={stream} />
+                <div className="col" key={stream.id}>
+                  <StreamCard stream={stream} />
+                </div>
               ))
             ) : (
               <div className="col-12">

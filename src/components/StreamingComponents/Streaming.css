@@ -4,12 +4,24 @@
 
 #Middle-Page {
     height: 100%;
-    width: 77%;
+    /* width handled by bootstrap */
 }
 
 #Right-Page {
     height: 100%;
-    width: 23%;
+    /* width handled by bootstrap */
+}
+
+@media (max-width: 991px) {
+    #Middle-Page {
+        height: auto !important;
+        min-height: auto !important;
+    }
+
+    #Right-Page {
+        height: 600px !important;
+        /* Fixed height for chat on mobile */
+    }
 }
 
 .chat-offline-container {

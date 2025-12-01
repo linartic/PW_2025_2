@@ -12,7 +12,7 @@ interface StreamingProps {
     doFollowing: (user: User) => void
     doChatting: (message: Message, stream: Stream) => void
     GetUser: () => User | null
-    doViewersDivision : (dividendo : number, divisor : number, decimas : number) => string
+    doViewersDivision: (dividendo: number, divisor: number, decimas: number) => string
 }
 import { useState, useEffect } from "react"
 import { API_CONFIG, getAuthHeaders } from "../../config/api.config"
@@ -171,19 +171,21 @@ const Streaming = (props: StreamingProps) => {
     }
 
     return (
-        <div className="d-flex vh-100 no-scroll">
-            <div id="Middle-Page">
-                <StreamingSection doViewersDivision = {props.doViewersDivision} GetUser={props.GetUser}stream={localStream} following = {props.following} doFollowing={props.doFollowing}></StreamingSection>
+        <div className="d-flex flex-column flex-lg-row h-100 h-lg-100">
+            <div id="Middle-Page" className="col-12 col-lg-9 h-auto h-lg-100 overflow-auto">
+                <StreamingSection doViewersDivision={props.doViewersDivision} GetUser={props.GetUser} stream={localStream} following={props.following} doFollowing={props.doFollowing}></StreamingSection>
             </div>
-            <div id="Right-Page">
-                {localStream.user.online ? (
-                    <ChatSection stream={localStream} doChatting={props.doChatting} GetUser={props.GetUser}></ChatSection>
-                ) : (
-                    <div className="d-flex h-100 flex-column justify-content-center align-items-center text-center p-4 chat-offline-container">
-                        <h5>Chat Offline</h5>
-                        <p className="text-muted">El chat está deshabilitado porque el stream ha finalizado.</p>
-                    </div>
-                )}
+            <div id="Right-Page" className="col-12 col-lg-3 h-auto h-lg-100 border-start border-secondary">
+                <div className="h-100" style={{ minHeight: '500px' }}>
+                    {localStream.user.online ? (
+                        <ChatSection stream={localStream} doChatting={props.doChatting} GetUser={props.GetUser}></ChatSection>
+                    ) : (
+                        <div className="d-flex h-100 flex-column justify-content-center align-items-center text-center p-4 chat-offline-container">
+                            <h5>Chat Offline</h5>
+                            <p className="text-muted">El chat está deshabilitado porque el stream ha finalizado.</p>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     )

@@ -193,7 +193,7 @@ const StreamingSection = (props: StreamingSectionProps) => {
                 />
             )}
             <div className="MiddleSide">
-                <div className="VideoPlace">
+                <div className="VideoPlace ratio ratio-16x9">
                     {iframeUrl ? (
                         <iframe
                             src={iframeUrl}
@@ -203,14 +203,14 @@ const StreamingSection = (props: StreamingSectionProps) => {
                         ></iframe>
                     ) : (
                         <img
-                            className="VideoPlaceHolder"
+                            className="VideoPlaceHolder w-100 h-100 object-fit-cover"
                             src={(props.stream.thumbnail || "https://placehold.co/800x450?text=No+Thumbnail").replace('via.placeholder.com', 'placehold.co')}
                             alt="Stream"
                         />
                     )}
                 </div>
-                <div className="d-flex justify-content-between my-3">
-                    <div className="text-start d-flex align-items-center">
+                <div className="d-flex flex-column flex-md-row justify-content-between my-3 px-3">
+                    <div className="text-start d-flex align-items-center mb-3 mb-md-0">
                         <div className="ImgStreamBox mx-3">
                             <Link to={`/profile/${props.stream.user.name}`}>
                                 <img
@@ -228,25 +228,27 @@ const StreamingSection = (props: StreamingSectionProps) => {
                             </Link>
                         </div>
                     </div>
-                    <div className="text-start ">
+                    <div className="text-start d-flex flex-column flex-md-row align-items-start align-items-md-center">
                         {
                             !Issighting && user ?
-                                <FollowButton doFollowing={props.doFollowing} isFollowing={isFollowing()} user={props.stream.user}></FollowButton>
+                                <div className="mb-2 mb-md-0">
+                                    <FollowButton doFollowing={props.doFollowing} isFollowing={isFollowing()} user={props.stream.user}></FollowButton>
+                                </div>
                                 : ""
                         }
-                        <div className="ms-4">
+                        <div className="ms-0 ms-md-4">
                             <span className="badge bg-danger">{props.stream.viewersnumber >= 1000000 ? props.doViewersDivision(props.stream.viewersnumber, 1000000, 1) + " M " : props.stream.viewersnumber >= 1000 ? props.doViewersDivision(props.stream.viewersnumber, 1000, 1) + " K " : props.stream.viewersnumber}viewers</span>
                         </div>
                     </div>
                 </div>
-                <div className="d-flex justify-content-between ">
-                    <div className="fill-sides">
+                <div className="row mx-0">
+                    <div className="col-12 col-md-6 mb-3">
                         <div className="d-flex justify-content-between ">
                             <h3 className="TextBox mx-4">Acerca de {props.stream.user.name} </h3>
                         </div>
                         <div className="alert alert-info m-4 mt-2 text-card border-0">
-                            <div className="d-flex justify-content-between my-3">
-                                <div className="mx-3">
+                            <div className="d-flex flex-column flex-xl-row justify-content-between my-3">
+                                <div className="mx-3 mb-3 mb-xl-0">
                                     <h3 className="TextBox mx-3">{props.stream.user.followers.length} seguidores</h3>
                                     <p className="mx-3 text-break word-break-break-word">{props.stream.user.bio ? props.stream.user.bio : `Hola soy ${props.stream.user.name} y hago streams!`}</p>
                                 </div>
@@ -260,7 +262,7 @@ const StreamingSection = (props: StreamingSectionProps) => {
                             </div>
                         </div>
                     </div>
-                    <div className="fill-sides">
+                    <div className="col-12 col-md-6 mb-3">
                         <div className="d-flex justify-content-between">
                             <h3 className="TextBox mx-4">Metas de {props.stream.user.name} </h3>
                         </div>

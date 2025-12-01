@@ -11,32 +11,30 @@ import "../../GlobalObjects/Animations.css"
 import "../../GlobalObjects/Global.css"
 
 //Props
-interface GameCardProps{
-    game : Game
+interface GameCardProps {
+    game: Game
 }
 const GameCard = (props: GameCardProps) => {
-    return(
-        <div className="col-6 col-sm-4 col-md-3 col-lg-2 mb-4">
-            <div className="card">
-                <div>
-                    <Link to={`/game/${props.game.name}`}>
-                        <img src={props.game.photo} className="card-img-top clickable"/>
-                    </Link>
-                </div>
-                <div className="card-body">
-                    <h6 className="card-title fw-bold">{props.game.name}</h6>
-                    {
-                        props.game.tags.map((tag : GameTag) => {
-                            return (
-                                <Link to={`/exploretags/${tag.name}`}>
-                                    <span className="badge tag m-1">{tag.name}</span>
-                                </Link>
-                            )
-                        })
-                    } 
-                </div>
+    return (
+        <div className="card h-100 border-0">
+            <div>
+                <Link to={`/game/${props.game.name}`}>
+                    <img src={props.game.photo} className="card-img-top clickable" />
+                </Link>
             </div>
-		</div>
+            <div className="card-body">
+                <h6 className="card-title fw-bold">{props.game.name}</h6>
+                {
+                    props.game.tags.map((tag: GameTag) => {
+                        return (
+                            <Link to={`/exploretags/${tag.name}`} key={tag.id}>
+                                <span className="badge tag m-1">{tag.name}</span>
+                            </Link>
+                        )
+                    })
+                }
+            </div>
+        </div>
     )
 }
 export default GameCard

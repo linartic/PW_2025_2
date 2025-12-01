@@ -67,7 +67,7 @@ const PaymentReturn = () => {
         return (
             <div className="container mt-5 text-center">
                 {showReceipt && transaction ? (
-                    <div className="card border-0 shadow-lg p-5 mx-auto receipt-container receipt-card">
+                    <div className="card border-0 shadow-lg p-3 p-md-5 mx-auto receipt-container receipt-card">
                         <div className="text-center mb-4">
                             <h3 className="fw-bold text-uppercase receipt-title">Comprobante de Pago</h3>
                             <p className="text-muted small">ID: {transaction.id}</p>

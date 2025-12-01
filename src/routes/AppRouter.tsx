@@ -3,7 +3,7 @@
 
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from '../context/AuthContext';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import NavBar from '../components/NavBarComponents/NavBar';
 import SideBar from "../components/SideBar/SideBar";
 import Home from '../components/HomeComponents/Home';
@@ -61,39 +61,66 @@ interface AppRouterProps {
 	doLogIn: (email: string, pass: string) => Promise<number>
 	doSignIn: (name: string, email: string, pass: string) => Promise<number>
 	doLogOut: () => void
-	doViewersDivision : (dividendo : number, divisor : number, decimas : number) => string
+	doViewersDivision: (dividendo: number, divisor: number, decimas: number) => string
 	doChatting: (message: Message, stream: Stream) => void
-	reloadGameViewers : (viewers : number, game : Game)  => void 
+	reloadGameViewers: (viewers: number, game: Game) => void
 	doStreaming: (user: string, title: string, game: string, link: string) => Promise<void>
 	GetUser: () => User | null
 }
 
 const AppRouter = (props: AppRouterProps) => {
+	const [showMobileSidebar, setShowMobileSidebar] = useState(false);
+
+	const handleCloseSidebar = () => setShowMobileSidebar(false);
+	const handleShowSidebar = () => setShowMobileSidebar(true);
+
 	return (
 		<BrowserRouter basename='/PW_Frontend_2025_2'>
 			<AuthProvider>
 				<AuthSync user={props.user} />
-				<NavBar doLogOut={props.doLogOut} user={props.user} packs={props.packs}></NavBar>
-				<div className="d-flex pages vh-100 no-scroll">
-					<div className="col-2" id="Sidebar">
-						<SideBar doViewersDivision={props.doViewersDivision} streams = {props.streams} following = {props.following}></SideBar>
+				<NavBar
+					doLogOut={props.doLogOut}
+					user={props.user}
+					packs={props.packs}
+					onMenuClick={handleShowSidebar}
+				/>
+
+				{/* Mobile Sidebar (Offcanvas) */}
+				<div className="d-md-none">
+					<div className={`offcanvas offcanvas-start text-bg-dark ${showMobileSidebar ? 'show' : ''}`} tabIndex={-1} style={{ visibility: showMobileSidebar ? 'visible' : 'hidden' }}>
+						<div className="offcanvas-header">
+							<h5 className="offcanvas-title">Menú</h5>
+							<button type="button" className="btn-close btn-close-white" onClick={handleCloseSidebar}></button>
+						</div>
+						<div className="offcanvas-body">
+							<SideBar doViewersDivision={props.doViewersDivision} streams={props.streams} following={props.following} />
+						</div>
 					</div>
-					<div className="col-10 d-flex flex-column" id="Main-Page">
+					{showMobileSidebar && <div className="offcanvas-backdrop fade show" onClick={handleCloseSidebar}></div>}
+				</div>
+
+				<div className="d-flex pages vh-100 no-scroll">
+					{/* Desktop Sidebar */}
+					<div className="col-md-3 col-xl-2 d-none d-md-block" id="Sidebar">
+						<SideBar doViewersDivision={props.doViewersDivision} streams={props.streams} following={props.following}></SideBar>
+					</div>
+
+					{/* Main Content */}
+					<div className="col-12 col-md-9 col-xl-10 d-flex flex-column" id="Main-Page">
 						<Routes>
 							<Route path="/" element={<Home recommendedstreams={props.streams} />} />
 							<Route path="/exploretags" element={<ExploreTags tags={props.tags} />} />
 							<Route path="/exploretags/:name" element={<ExploreGames games={props.games} />} />
-							<Route path="/search/:name" element={<Search games={props.games} users={props.users}streams={props.streams}/>}/>
-							<Route path="/streaming/:name" element={<Streaming doViewersDivision={props.doViewersDivision} doFollowing={props.doFollowing} streams={props.streams} following = {props.following} GetUser={props.GetUser} doChatting={props.doChatting}/>} />
-							<Route path="/TyC" element={<TyC/>}/>
+							<Route path="/search/:name" element={<Search games={props.games} users={props.users} streams={props.streams} />} />
+							<Route path="/streaming/:name" element={<Streaming doViewersDivision={props.doViewersDivision} doFollowing={props.doFollowing} streams={props.streams} following={props.following} GetUser={props.GetUser} doChatting={props.doChatting} />} />
+							<Route path="/TyC" element={<TyC />} />
 							<Route path="/nosotros" element={<Nosotros GetUser={props.GetUser} />} />
 							<Route path="/login" element={<Login doLogIn={props.doLogIn} />} />
 							<Route path="/signin" element={<Signin doSignIn={props.doSignIn} />} />
 							<Route path="/payment" element={<CardInput GetUser={props.GetUser} doPayment={props.doPayment} />} />
 							<Route path="/payment/return" element={<PaymentReturn />} />
-							<Route path="/game/:name" element={<GameProfile reloadGameViewers={props.reloadGameViewers} doViewersDivision={props.doViewersDivision} games={props.games} streams={props.streams}/>}/>
+							<Route path="/game/:name" element={<GameProfile reloadGameViewers={props.reloadGameViewers} doViewersDivision={props.doViewersDivision} games={props.games} streams={props.streams} />} />
 
-							<Route path="/profile/:identifier" element={<Profile doFollowing={props.doFollowing} following={props.following} users={props.users} GetUser={props.GetUser} />} />
 							<Route path="/profile/:identifier" element={<Profile doFollowing={props.doFollowing} following={props.following} users={props.users} GetUser={props.GetUser} />} />
 							<Route path="/panelcreador" element={<PrivateRoute><PanelControl GetUser={props.GetUser} doChatting={props.doChatting} doStreaming={props.doStreaming} games={props.games} /></PrivateRoute>} />
 							<Route path="/gestion-regalos" element={<PrivateRoute><GestionRegalos /></PrivateRoute>} />

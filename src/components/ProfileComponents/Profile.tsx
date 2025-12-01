@@ -126,7 +126,7 @@ const Profile = (props: ProfileProps) => {
         return following
     }
     return (
-        <div className="container p-5 ">
+        <div className="container p-3 p-lg-5 ">
             <div className="row justify-content-center">
                 <div className="card position-relative  w-100 h-100">
                     <div className="card-body">

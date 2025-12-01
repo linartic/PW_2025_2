@@ -364,12 +364,14 @@ const PanelControl = (props: PanelControlProps) => {
       )}
 
       <div className="row mt-3 flex-grow-1 panel-content-row">
-        <PanelOptions
-          opciones={["Stream", "Videos", "Estadísticas", "Regalos", "Niveles"]}
-          onSeleccionar={(o) => setSeccionActiva(o)}
-        />
+        <div className="col-12 col-md-2 mb-3 mb-md-0">
+          <PanelOptions
+            opciones={["Stream", "Videos", "Estadísticas", "Regalos", "Niveles"]}
+            onSeleccionar={(o) => setSeccionActiva(o)}
+          />
+        </div>
 
-        <div className="col-10 h-100">
+        <div className="col-12 col-md-10 h-100">
           {contenidoCentral}
         </div>
       </div>
