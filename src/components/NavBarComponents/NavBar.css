@@ -1,0 +1,49 @@
+.NavBar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    display: flex; /*Ordena el componente en una linea. No se hace solo con row porque se necesita el align items*/
+    align-items: center; /*Alinearlos al centro vertical*/
+    background-color: rgb(var(--nebula-violet));
+    height: 4rem;
+}
+.NavBar-Header{
+    color: rgb(var(--starlight-gray));
+    font-size: medium;
+}
+.NavBar-Header:hover {
+  	animation: hoverColorFlow 1s forwards;
+}
+
+.NavBar-Header:not(:hover) {
+  	animation: hoverColorReverse 1s forwards;
+}
+
+@keyframes hoverColorFlow {
+	0%   { color: rgb(var(--luminous-teal)); }
+	50%  { color: rgb(var(--red-giant-orange)); }
+	100% { color: rgb(var(--blue-dwarf)); }
+}
+
+@keyframes hoverColorReverse {
+	0%   { color: rgb(var(--blue-dwarf)); }
+	50%  { color: rgb(var(--red-giant-orange)); }
+	100% { color: rgb(var(--luminous-teal)); }
+}
+
+.Right-NavBar{
+    display: flex; /*Para poder colocar el título y los 3 puntos sin que se muevan, activa el align items*/
+    align-items: center; /*Alinearlos al centro vertical*/
+    text-align: left; /*Alinearlos a la izquierda horizontal*/
+}
+.Middle-NavBar{
+    text-align: center; /*Alinearlos al centro horizontal*/
+}
+.Left-NavBar{
+    text-align: right; /*Alinearlos a la derecha horizontal*/
+}
+.stars_coins{
+    color: rgb(var(--starlight-gray));
+}

@@ -1,0 +1,17 @@
+/* components/NavBar/UserIcon.css */
+.PfP{
+    width: 400%;
+    border-radius: 100%;
+}
+.pfpdropdown{
+    width: 20%;
+    border-radius: 100%;
+}
+.user-icon-button {
+    border: none;
+    background: transparent;
+}
+
+.user-icon-cursor {
+  cursor: pointer;
+}
