@@ -1,0 +1,45 @@
+/* PaymentReturn.css */
+
+/* Estilos para impresión */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    .receipt-container,
+    .receipt-container * {
+        visibility: visible;
+    }
+
+    .receipt-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        color: black !important;
+        background: white !important;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .d-print-block {
+        display: block !important;
+    }
+}
+
+.receipt-card {
+    max-width: 500px;
+    background: white;
+    color: #333;
+}
+
+.receipt-title {
+    letter-spacing: 2px;
+    color: #000;
+}
+
+.success-icon {
+    font-size: 4rem;
+}

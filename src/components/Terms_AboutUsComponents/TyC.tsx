@@ -77,7 +77,7 @@ const TyC = () => {
 							{/* Imagen ilustrativa */}
 							<div className="text-center my-4">
 								<img
-									src={`${import.meta.env.BASE_URL}assets/img_tyc.png`}
+									src="https://res.cloudinary.com/djiitravd/image/upload/v1764572522/img_tyc_zowz4r.webp"
 									alt="Términos y Condiciones"
 									className="img-fluid rounded shadow"
 									style={{ maxWidth: '600px' }}

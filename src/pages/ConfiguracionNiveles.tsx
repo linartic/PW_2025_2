@@ -22,18 +22,13 @@ const ConfiguracionNiveles = () => {
       ]);
 
       if (templateData && templateData.length > 0) {
-        // Merge template data with user's saved points/rewards
         const mergedLevels = templateData.map((templateLevel, index) => {
-          // Try to find matching user level by ID or index
-          // Assuming template IDs are 1-10 and user IDs might match or be sequential
           const userLevel = userLevelsData.find(ul => ul.id === templateLevel.id) || userLevelsData[index];
 
           return {
             ...templateLevel,
-            // Use user's points/reward if available, otherwise default to template
             puntosRequeridos: userLevel ? userLevel.puntosRequeridos : templateLevel.puntosRequeridos,
             recompensa: userLevel ? userLevel.recompensa : templateLevel.recompensa,
-            // Always use template name and image
             nombre: templateLevel.nombre,
             image: templateLevel.image
           };
@@ -94,7 +89,7 @@ const ConfiguracionNiveles = () => {
           <table className="table table-hover align-middle">
             <thead>
               <tr>
-                <th style={{ width: '60px' }}>Icono</th>
+                <th className="icon-column">Icono</th>
                 <th>Nombre del Nivel</th>
                 <th>Puntos Requeridos</th>
                 <th>Recompensa</th>
@@ -105,7 +100,7 @@ const ConfiguracionNiveles = () => {
                 <tr key={nivel.id || Math.random()}>
                   <td>
                     {nivel.image ? (
-                      <img src={nivel.image} alt={nivel.nombre} className="rounded-circle medal"/>
+                      <img src={nivel.image} alt={nivel.nombre} className="rounded-circle medal" />
                     ) : (
                       <div className="bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white">
                         {nivel.nombre.charAt(0)}

@@ -115,6 +115,16 @@ export interface UpdateStreamSettingsResponse {
  * Actualizar configuración del stream
  */
 export const updateStreamSettings = async (settings: StreamSettings): Promise<UpdateStreamSettingsResponse> => {
+  // Verificar si hay token antes de intentar la llamada
+  const token = localStorage.getItem('auth_token');
+  if (!token) {
+    return {
+      success: false,
+      message: "Usuario no autenticado",
+      stream: null
+    };
+  }
+
   const url = `${API_CONFIG.BASE_URL}/api/streamer/settings`;
   return apiPut<UpdateStreamSettingsResponse>(url, settings, getAuthHeaders());
 };

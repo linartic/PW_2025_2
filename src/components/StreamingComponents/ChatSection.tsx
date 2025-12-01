@@ -414,16 +414,19 @@ const ChatSection = (props: ChatSectionProps) => {
     // Listen for gift events from WebSocket
     useEffect(() => {
         const unsubscribe = chatService.onGiftReceived((giftData) => {
-            setGiftNotification({
-                sender: giftData.senderName,
-                gift: giftData.giftName
-            });
+            // Only show notification if I am the streamer
+            if (user && String(user.id) === String(props.stream.user.id)) {
+                setGiftNotification({
+                    sender: giftData.senderName,
+                    gift: giftData.giftName
+                });
+            }
         });
 
         return () => {
             unsubscribe();
         };
-    }, []);
+    }, [user, props.stream.user.id]);
 
     const isStreamer = user && String(user.id) === String(props.stream.user.id);
 
