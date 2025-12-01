@@ -1,0 +1,62 @@
+@keyframes spaceMove {
+	0% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+	100% { background-position: 0% 50%; }
+}
+.pages {
+	padding-top: 4rem; /*IMPORTANTISIMO SINO EL SIDEBAR SE MUERE*/
+	background: rgb(var(--space-black));
+	background-size: 800% 800%;
+	animation: spaceMove 18s ease infinite;
+	color: rgb(var(--starlight-gray));
+	overflow: hidden;
+}
+
+.card {
+	border-radius: 24px;
+	box-shadow: 0 0 15px rgba(92, 26, 255, 0.2),
+				0 0 25px rgba(160, 32, 240, 0.15);
+	
+	color: rgb(var(--starlight-gray));
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+	transform: translateY(-4px) scale(1.02);
+	box-shadow: 0 0 20px rgba(160, 32, 240, 0.4),
+				0 0 35px rgba(255, 110, 199, 0.25);
+}
+@keyframes cardGlow {
+	0% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+	100% { background-position: 0% 50%; }
+}
+
+
+.clickable_text {
+	color: rgb(var(--blue-dwarf));
+	transition: color 1s linear;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.clickable_text:hover {
+  	animation: hoverColorFlow 1s forwards;
+	cursor : pointer;
+}
+
+.clickable_text:not(:hover) {
+  	animation: hoverColorReverse 1s forwards;
+}
+
+@keyframes hoverColorFlow {
+	0%   { color: rgb(var(--luminous-teal)); }
+	50%  { color: rgb(var(--red-giant-orange)); }
+	100% { color: rgb(var(--blue-dwarf)); }
+}
+
+@keyframes hoverColorReverse {
+	0%   { color: rgb(var(--blue-dwarf)); }
+	50%  { color: rgb(var(--red-giant-orange)); }
+	100% { color: rgb(var(--luminous-teal)); }
+}

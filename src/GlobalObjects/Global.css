@@ -1,0 +1,91 @@
+:root {
+    --space-black: 9, 0, 64;
+    --nebula-violet: 71, 19, 150;
+    --galactic-indigo: 71, 19, 71;  /*Bordes*/
+    --starlight-gray: 224, 224, 224;  /*Texto Principal*/
+    --dusty-nebula: 166, 156, 172;  /*Texto Secundario*/
+    --supernova-yellow: 255, 210, 63;
+    --red-giant-orange: 255, 107, 53;  /*Botones 2*/
+    --blue-dwarf: 46, 196, 182;  /*Hover luminoso*/
+    --stellar-blue: 177, 59, 255;
+    --luminous-teal: 255, 204, 0;
+}
+html, body {
+    height: 100% !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+#Sidebar{ 
+    overflow-y: auto;
+}
+#Main-Page{
+    zoom: 1;
+    padding: 0px;
+	overflow-y: auto;
+    height: 100%;
+}
+.no-scroll {
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+.fill-below {
+    flex: 1;
+}
+.fill-sides{
+    flex-grow: 1;
+    flex-shrink: 0;
+    min-width: 0;
+}
+.temp{
+    color: white;
+    background-color: black;
+    border: r
+}
+.tag{
+    background-color: rgb(var(--red-giant-orange));
+}
+.card{
+    background-color: rgb(var(--nebula-violet));
+    color: rgb(var(--starlight-gray));
+}
+.card-image {
+    position: relative;
+}
+.page-text {
+    color: rgb(var(--starlight-gray)) !important;
+}
+.text-muted {
+    color: rgb(var(--dusty-nebula)) !important;
+}
+.clickable {
+    cursor: pointer
+}
+.text-card{
+    background-color: rgb(var(--nebula-violet)) !important;
+    color: rgb(var(--starlight-gray));
+}
+.page-button{
+    background-color: rgb(var(--stellar-blue)) !important;
+    color: rgb(var(--starlight-gray));
+}
+/*ScrollBar*/
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #2b0047;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(var(--nebula-violet), 0.5);
+    border-radius: 16px;
+}
+/*Login Y Sign In*/
+.account-errors{
+    color: rgba(var(--red-giant-orange));
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}

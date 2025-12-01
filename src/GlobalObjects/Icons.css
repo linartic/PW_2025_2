@@ -1,0 +1,22 @@
+.icon{
+    font-size: 30px;
+    padding: 0px !important;
+    color: rgb(var(--starlight-gray))
+}
+.stars{
+    font-size: 30px;
+    color: rgb(var(--luminous-teal));
+    padding: 0px;
+}
+.ministars{
+    font-size: 12px;
+    color: rgb(var(--luminous-teal));
+    padding: 0px;
+}
+.icondot{
+    font-size: 50%;
+    margin: 10%;
+}
+.red{
+    color : red;
+}
