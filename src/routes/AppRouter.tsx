@@ -70,7 +70,7 @@ interface AppRouterProps {
 
 const AppRouter = (props: AppRouterProps) => {
 	return (
-		<BrowserRouter basename='/PW-Frontend'>
+		<BrowserRouter basename='/PW_Frontend_2025_2'>
 			<AuthProvider>
 				<AuthSync user={props.user} />
 				<NavBar doLogOut={props.doLogOut} user={props.user} packs={props.packs}></NavBar>
